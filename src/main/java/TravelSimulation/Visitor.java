@@ -9,15 +9,12 @@ import desmoj.core.simulator.SimProcess;
  */
 public abstract class Visitor extends SimProcess {
 
-    //private CityModel myModel;
-
     public Visitor(Model owner, String name, boolean showInTrace) {
         super(owner, name, showInTrace);
-        //myModel = (CityModel)owner;
     }
 
-    /*public void lifeCycle() {
+    public void lifeCycle() {
 
-    }*/
+    }
 
 }

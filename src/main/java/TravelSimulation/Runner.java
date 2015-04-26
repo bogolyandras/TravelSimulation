@@ -1,10 +1,14 @@
 package TravelSimulation;
 
 import desmoj.core.util.AccessPoint;
+import desmoj.core.util.SimRunListener;
 import desmoj.extensions.experimentation.ui.ExperimentStarterApplication;
+import desmoj.extensions.experimentation.ui.GraphicalObserverContext;
+import desmoj.extensions.experimentation.ui.TimeSeriesPlotter;
 import desmoj.extensions.experimentation.util.AccessUtil;
 import desmoj.extensions.experimentation.util.ExperimentRunner;
 
+import javax.sound.midi.Track;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -18,16 +22,28 @@ public class Runner extends ExperimentRunner {
         super();
     }
 
+    public SimRunListener[] createSimRunListeners(GraphicalObserverContext c) {
+
+        TravelSimulationModel travelSimulationModel = (TravelSimulationModel)getModel();
+
+        TimeSeriesPlotter tp1 = new TimeSeriesPlotter("Városok populációi",c, travelSimulationModel.ravenna.getPopulationSeries(), 400,360, travelSimulationModel.ravenna.getPopulationSeries().getName());
+        tp1.addTimeSeries(travelSimulationModel.velence.getPopulationSeries());
+        tp1.addTimeSeries(travelSimulationModel.milano.getPopulationSeries());
+
+        return new SimRunListener[] { tp1 };
+
+    }
+
     public Map<String,AccessPoint> createParameters() {
         Map<String,AccessPoint> pm = super.createParameters();
-        AccessUtil.setValue(pm, EXP_STOP_TIME, 720000.0);
+        AccessUtil.setValue(pm, EXP_STOP_TIME, TravelSimulationModel.stopTime);
         AccessUtil.setValue(pm, EXP_TRACE_STOP, 100.0);
         AccessUtil.setValue(pm, EXP_REF_UNIT, TimeUnit.MINUTES);
         return pm;
     }
 
     public static void main(String[] args) throws Exception {
-        new ExperimentStarterApplication(CityModel.class, Runner.class).setVisible(true);
+        new ExperimentStarterApplication(TravelSimulationModel.class, Runner.class).setVisible(true);
     }
 
 }
