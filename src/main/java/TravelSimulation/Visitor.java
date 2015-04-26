@@ -7,7 +7,7 @@ import desmoj.core.simulator.SimProcess;
  * Created by András on 4/25/2015.
  *
  */
-public class Visitor extends SimProcess {
+public abstract class Visitor extends SimProcess {
 
     //private CityModel myModel;
 
@@ -16,8 +16,8 @@ public class Visitor extends SimProcess {
         //myModel = (CityModel)owner;
     }
 
-    public void lifeCycle() {
+    /*public void lifeCycle() {
 
-    }
+    }*/
 
 }

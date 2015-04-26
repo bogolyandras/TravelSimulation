@@ -24,27 +24,22 @@ public class CityModel extends Model implements Parameterizable {
         return "Városszimulációs modell.";
     }
 
-    //Látogatók érkezése exponenciális eloszlás szerint
-    private ContDistExponential visitorArrivalTime;
-    public double getVisitorArricalTime() {
-        return visitorArrivalTime.sample();
-    }
+    City ravenna;
 
     public void init() {
-        visitorArrivalTime = new ContDistExponential(this, "VisitorArrivalTimeStream", visitorArrival * 100, true, false);
+        //Városok létrehozása
+        ravenna = new City(this, "Ravenna", false, visitorArrivalRavenna * 100);
     }
 
     public void doInitialSchedules() {
-
-        //A látogatók érkezése
-        VisitorGenerator visitorGenerator = new VisitorGenerator(this, "VisitorArrival", false);
-        visitorGenerator.schedule(new TimeSpan(getVisitorArricalTime()));
+        //Városok látogatóinak ütemezése
+        ravenna.schedule();
     }
 
-    protected double visitorArrival = 0.5;
+    protected double visitorArrivalRavenna = 0.5;
     public Map<String, AccessPoint> createParameters() {
         Map<String, AccessPoint> pm = new TreeMap<String, AccessPoint>();
-        pm.put("Látogatók érkezése _ percenként", new MutableFieldAccessPoint("visitorArrival", this));
+        pm.put("Látogatók érkezése Ravennába _ percenként", new MutableFieldAccessPoint("visitorArrivalRavenna", this));
         return pm;
     }
 

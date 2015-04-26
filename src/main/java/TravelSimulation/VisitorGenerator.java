@@ -10,14 +10,20 @@ import desmoj.core.simulator.TimeSpan;
  */
 public class VisitorGenerator extends ExternalEvent {
 
-    private CityModel myModel;
+    //Hivatkozás az adott városhoz
+    private City city;
 
-    public VisitorGenerator(Model owner, String name, boolean showInReport) {
+    public VisitorGenerator(Model owner, String name, boolean showInReport, City city) {
         super(owner, name, showInReport);
-        myModel = (CityModel)owner;
+        this.city = city;
     }
 
     public void eventRoutine() {
-        schedule(new TimeSpan(myModel.getVisitorArricalTime()));
+
+
+
+        //Önmagát visszahívja
+        schedule(new TimeSpan(city.getVisitorArrivalTime()));
     }
+
 }
