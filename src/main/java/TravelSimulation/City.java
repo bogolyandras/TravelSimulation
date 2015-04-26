@@ -19,7 +19,8 @@ public class City extends SimProcess {
     public City(Model owner, String name, boolean showInTrace, double visitorArrivalTime) {
         super(owner, name, showInTrace);
         visitorArrivalDistribution = new ContDistExponential(owner, "VisitorArrivalTimeStream", visitorArrivalTime * 100, true, false);
-        visitorGenerator = new VisitorGenerator(owner, "VisitorGenerator for " + name, false, this);
+        touristGenerator = new TouristGenerator(owner, "TouristGenerator for " + name, false, this);
+        dataUpdater = new DataUpdate(owner, "Dataupdate for " + name, false, this);
     }
 
     List<Visitor> Population = new ArrayList<>();
@@ -35,14 +36,17 @@ public class City extends SimProcess {
     }
 
     //Látogatók érkezése kívülről
-    private VisitorGenerator visitorGenerator;
+    private TouristGenerator touristGenerator;
     private ContDistExponential visitorArrivalDistribution;
     public double getVisitorArrivalTime() {
         return visitorArrivalDistribution.sample();
     }
 
+    private DataUpdate dataUpdater;
+
     public void schedule() {
-        visitorGenerator.schedule(new TimeSpan(getVisitorArrivalTime()));
+        touristGenerator.schedule(new TimeSpan(getVisitorArrivalTime()));
+        dataUpdater.schedule(new TimeSpan(0.0));
     }
 
     public void lifeCycle() {

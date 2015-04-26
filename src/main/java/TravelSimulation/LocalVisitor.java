@@ -9,8 +9,8 @@ import desmoj.core.simulator.Model;
 
 public class LocalVisitor extends Visitor {
 
-    public LocalVisitor(Model owner, String name, boolean showInTrace) {
-        super(owner, name, showInTrace);
+    public LocalVisitor(Model owner, String name, boolean showInTrace, City city) {
+        super(owner, name, showInTrace, city);
     }
 
 }
