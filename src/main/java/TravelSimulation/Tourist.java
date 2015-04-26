@@ -26,9 +26,22 @@ public class Tourist extends Visitor {
 
     public void lifeCycle() {
 
+        double decision;
         while (true) {
-            hold(new TimeSpan(10000.0));
-            funds -= 10;
+            decision = TravelSimulationModel.randomGenerator.nextDouble();
+            if (false) {
+                //Utazás 10%
+                Route route = super.getCity().getDestinations().get(
+                        TravelSimulationModel.randomGenerator.nextInt(super.getCity().getDestinations().size()));
+                //route.touristsWaiting.insert(this);
+                passivate(); //Várakozás
+            } else {
+                //Pénzköltés 90%
+                funds -= 10;
+                hold(new TimeSpan(10000.0));
+            }
+
+            //Ha elfogyott a pénz, akkor hazamegyünk
             if (funds <= 0) break;
         }
 

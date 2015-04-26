@@ -20,7 +20,7 @@ public class City extends SimProcess {
         super(owner, name, showInTrace);
         visitorArrivalDistribution = new ContDistExponential(owner, "VisitorArrivalTimeStream", visitorArrivalTime * 100, true, false);
         touristGenerator = new TouristGenerator(owner, "TouristGenerator for " + name, false, this);
-        dataUpdater = new DataUpdate(owner, "Dataupdate for " + name, false, this);
+        dataUpdater = new DataUpdater(owner, "Dataupdate for " + name, false, this);
     }
 
     List<Visitor> Population = new ArrayList<>();
@@ -30,6 +30,12 @@ public class City extends SimProcess {
     public List<Visitor> getPopulation() {
         return Population;
     }
+
+    public List<Route> getDestinations() {
+        return destinations;
+    }
+
+    List<Route> destinations = new ArrayList<>();
 
     public TimeSeries getPopulationSeries() {
         return populationSeries;
@@ -42,7 +48,7 @@ public class City extends SimProcess {
         return visitorArrivalDistribution.sample();
     }
 
-    private DataUpdate dataUpdater;
+    private DataUpdater dataUpdater;
 
     public void schedule() {
         touristGenerator.schedule(new TimeSpan(getVisitorArrivalTime()));

@@ -8,7 +8,6 @@ import desmoj.extensions.experimentation.ui.TimeSeriesPlotter;
 import desmoj.extensions.experimentation.util.AccessUtil;
 import desmoj.extensions.experimentation.util.ExperimentRunner;
 
-import javax.sound.midi.Track;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -16,9 +15,9 @@ import java.util.concurrent.TimeUnit;
  * Created by András on 4/20/2015.
  *
  */
-public class Runner extends ExperimentRunner {
+public class GraphicalModelRunner extends ExperimentRunner {
 
-    public Runner() {
+    public GraphicalModelRunner() {
         super();
     }
 
@@ -30,7 +29,7 @@ public class Runner extends ExperimentRunner {
         tp1.addTimeSeries(travelSimulationModel.velence.getPopulationSeries());
         tp1.addTimeSeries(travelSimulationModel.milano.getPopulationSeries());
 
-        return new SimRunListener[] { tp1 };
+        return new SimRunListener[] { tp1};
 
     }
 
@@ -43,7 +42,7 @@ public class Runner extends ExperimentRunner {
     }
 
     public static void main(String[] args) throws Exception {
-        new ExperimentStarterApplication(TravelSimulationModel.class, Runner.class).setVisible(true);
+        new ExperimentStarterApplication(TravelSimulationModel.class, GraphicalModelRunner.class).setVisible(true);
     }
 
 }
