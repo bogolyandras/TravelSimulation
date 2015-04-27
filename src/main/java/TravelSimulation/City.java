@@ -23,22 +23,31 @@ public class City extends SimProcess {
         dataUpdater = new DataUpdater(owner, "Dataupdate for " + name, false, this);
     }
 
+    //Lakosság
     List<Visitor> Population = new ArrayList<>();
-    TimeSeries populationSeries = new TimeSeries(getModel(), getName() + "Lakossága",
-            new TimeInstant(0), new TimeInstant(TravelSimulationModel.stopTime), true, false);
-
     public List<Visitor> getPopulation() {
         return Population;
     }
 
-    public List<Route> getDestinations() {
-        return destinations;
-    }
-
-    List<Route> destinations = new ArrayList<>();
-
+    //Lakosság rögzítése
+    TimeSeries populationSeries = new TimeSeries(getModel(), getName() + "Lakossága",
+            new TimeInstant(0), new TimeInstant(TravelSimulationModel.stopTime), true, false);
     public TimeSeries getPopulationSeries() {
         return populationSeries;
+    }
+
+    //Bevétel rögzítése
+    public double revenue = 0;
+    TimeSeries revenueSeries = new TimeSeries(getModel(), getName() + "Bevétele",
+            new TimeInstant(0), new TimeInstant(TravelSimulationModel.stopTime), true, false);
+    public TimeSeries getRevenueSeries() {
+        return revenueSeries;
+    }
+
+    //Útvonalak
+    List<Route> destinations = new ArrayList<>();
+    public List<Route> getDestinations() {
+        return destinations;
     }
 
     //Látogatók érkezése kívülről

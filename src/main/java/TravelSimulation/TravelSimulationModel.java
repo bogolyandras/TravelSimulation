@@ -49,8 +49,8 @@ public class TravelSimulationModel extends Model implements Parameterizable {
 
         //Városok közötti útvonalak létrehozása
         ravenna.getDestinations().add(new Route(milano, 180 * 100, 15.0));
-//        milano.getDestinations().add(new Route(velence, 261 * 100, 25.0));
-//        velence.getDestinations().add(new Route(ravenna, 220 * 100, 20.0));
+        milano.getDestinations().add(new Route(velence, 261 * 100, 25.0));
+        velence.getDestinations().add(new Route(ravenna, 220 * 100, 20.0));
     }
 
     public void doInitialSchedules() {

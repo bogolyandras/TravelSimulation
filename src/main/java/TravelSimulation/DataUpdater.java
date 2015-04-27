@@ -21,6 +21,7 @@ public class DataUpdater extends ExternalEvent {
 
     public void eventRoutine() {
         city.getPopulationSeries().update(city.getPopulation().size());
+        city.getRevenueSeries().update(city.revenue);
         //Óránként frissítendő
         schedule(new TimeSpan(6000.0));
     }

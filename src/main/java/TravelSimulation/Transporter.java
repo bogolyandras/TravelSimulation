@@ -3,6 +3,9 @@ package TravelSimulation;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.SimProcess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by András on 4/26/2015.
  *
@@ -22,11 +25,11 @@ public class Transporter extends SimProcess {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
+    private List<Tourist> passangers = new ArrayList<>();
 
     public void lifeCycle() {
+
+
 
     }
 

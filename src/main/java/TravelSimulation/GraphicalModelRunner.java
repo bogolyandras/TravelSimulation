@@ -29,7 +29,11 @@ public class GraphicalModelRunner extends ExperimentRunner {
         tp1.addTimeSeries(travelSimulationModel.velence.getPopulationSeries());
         tp1.addTimeSeries(travelSimulationModel.milano.getPopulationSeries());
 
-        return new SimRunListener[] { tp1};
+        TimeSeriesPlotter tp2 = new TimeSeriesPlotter("Városok bevételei",c, travelSimulationModel.ravenna.getRevenueSeries(), 400,360, travelSimulationModel.ravenna.getRevenueSeries().getName());
+        tp2.addTimeSeries(travelSimulationModel.velence.getRevenueSeries());
+        tp2.addTimeSeries(travelSimulationModel.milano.getRevenueSeries());
+
+        return new SimRunListener[] { tp1, tp2 };
 
     }
 

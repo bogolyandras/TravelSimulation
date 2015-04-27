@@ -33,11 +33,12 @@ public class Tourist extends Visitor {
                 //Utazás 10%
                 Route route = super.getCity().getDestinations().get(
                         TravelSimulationModel.randomGenerator.nextInt(super.getCity().getDestinations().size()));
-                //route.touristsWaiting.insert(this);
+                route.touristsWaiting.insert(this);
                 passivate(); //Várakozás
             } else {
                 //Pénzköltés 90%
                 funds -= 10;
+                super.getCity().revenue += 10;
                 hold(new TimeSpan(10000.0));
             }
 
