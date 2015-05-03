@@ -37,9 +37,7 @@ public class Tourist extends Visitor {
                 passivate(); //Várakozás
             } else {
                 //Pénzköltés 90% eséllyel
-                funds -= 10;
-                super.getCity().revenue += 10;
-                hold(new TimeSpan(10000.0));
+                funds -= visitAnAttractivity(this);
             }
 
             //Ha elfogyott a pénz, akkor hazamegyünk

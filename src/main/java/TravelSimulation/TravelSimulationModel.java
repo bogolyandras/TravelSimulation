@@ -21,7 +21,7 @@ import java.util.TreeMap;
 public class TravelSimulationModel extends Model implements Parameterizable {
 
     public TravelSimulationModel() {
-        super(null, "VarosModell", true, true);
+        super(null, "Utazás Szimulációs Modell", true, true);
     }
 
     public String description() {
@@ -82,6 +82,16 @@ public class TravelSimulationModel extends Model implements Parameterizable {
         ravenna_milano = new Transporter(this, "Ravenna Milánó", false, route1, 10);
         milano_velence = new Transporter(this, "Milánó Velence", false, route2, 20);
         velence_ravenna = new Transporter(this, "Velence Ravenna", false, route3, 30);
+
+        //Városok látnivalói
+        ravenna.getAttractivities().add(new Attractivity("Basilica of San Vitae", ravenna, 10, 60 * 100, 120 * 100));
+        ravenna.getAttractivities().add(new Attractivity("Mausoleum of Galla Placidia", ravenna, 8, 120 * 100, 240 * 100));
+
+        milano.getAttractivities().add(new Attractivity("Basilica of San Vitae", milano, 10, 60 * 100, 120 * 100));
+        milano.getAttractivities().add(new Attractivity("Mausoleum of Galla Placidia", milano, 8, 120 * 100, 240 * 100));
+
+        velence.getAttractivities().add(new Attractivity("Basilica of San Vitae", velence, 10, 60 * 100, 120 * 100));
+        velence.getAttractivities().add(new Attractivity("Mausoleum of Galla Placidia", velence, 8, 120 * 100, 240 * 100));
     }
 
     public void doInitialSchedules() {

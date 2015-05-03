@@ -35,6 +35,12 @@ public class City extends SimProcess {
         return Population;
     }
 
+    //Látnivalók
+    List<Attractivity> attractivities = new ArrayList<>();
+    public List<Attractivity> getAttractivities() {
+        return attractivities;
+    }
+
     //Lakosság rögzítése
     TimeSeries populationSeries = new TimeSeries(getModel(), getName() + "Lakossága",
             new TimeInstant(0), new TimeInstant(TravelSimulationModel.stopTime), true, false);

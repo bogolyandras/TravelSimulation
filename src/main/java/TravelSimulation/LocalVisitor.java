@@ -16,8 +16,17 @@ public class LocalVisitor extends Visitor {
 
     public void lifeCycle() {
 
+        double decision;
         while (true) {
-            hold(new TimeSpan(10.0*100));
+            decision = TravelSimulationModel.randomGenerator.nextDouble();
+            if (decision < 0.9) {
+                //Kisebb semmittevés 90% os eséllyel
+                hold(new TimeSpan(5*60*100));
+            } else {
+                //10% -os eséllyel egy nevezetesség meglátogatása
+                visitAnAttractivity(this);
+            }
+
         }
 
     }
