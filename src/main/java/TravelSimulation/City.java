@@ -16,15 +16,21 @@ import java.util.List;
  */
 public class City extends SimProcess {
 
-    public City(Model owner, String name, boolean showInTrace, double visitorArrivalTime) {
+    public City(Model owner, String name, boolean showInTrace, double visitorArrivalTime, int initialPopulation) {
         super(owner, name, showInTrace);
         visitorArrivalDistribution = new ContDistExponential(owner, "VisitorArrivalTimeStream", visitorArrivalTime * 100, true, false);
         touristGenerator = new TouristGenerator(owner, "TouristGenerator for " + name, false, this);
         dataUpdater = new DataUpdater(owner, "Dataupdate for " + name, false, this);
+
+        //Lakosság előkészítése
+        Population = new ArrayList<>();
+        for(int i = 0; i < initialPopulation; i++) {
+            Population.add(new LocalVisitor(owner, "Helyi János", false, this));
+        }
     }
 
     //Lakosság
-    List<Visitor> Population = new ArrayList<>();
+    List<Visitor> Population;
     public List<Visitor> getPopulation() {
         return Population;
     }
@@ -62,6 +68,11 @@ public class City extends SimProcess {
     public void schedule() {
         touristGenerator.schedule(new TimeSpan(getVisitorArrivalTime()));
         dataUpdater.schedule(new TimeSpan(0.0));
+        for(Visitor v : Population) {
+            if (v instanceof LocalVisitor) {
+                v.activate();
+            }
+        }
     }
 
     public void lifeCycle() {

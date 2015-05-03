@@ -25,12 +25,4 @@ public abstract class Visitor extends SimProcess {
         this.city = city;
     }
 
-    public void lifeCycle() {
-
-        hold(new TimeSpan(10.0));
-
-    }
-
-
-
 }

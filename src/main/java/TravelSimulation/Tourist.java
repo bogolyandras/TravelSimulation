@@ -30,13 +30,13 @@ public class Tourist extends Visitor {
         while (true) {
             decision = TravelSimulationModel.randomGenerator.nextDouble();
             if (false) {
-                //Utazás 10%
+                //Utazás 10% eséllyel
                 Route route = super.getCity().getDestinations().get(
                         TravelSimulationModel.randomGenerator.nextInt(super.getCity().getDestinations().size()));
                 route.touristsWaiting.insert(this);
                 passivate(); //Várakozás
             } else {
-                //Pénzköltés 90%
+                //Pénzköltés 90% eséllyel
                 funds -= 10;
                 super.getCity().revenue += 10;
                 hold(new TimeSpan(10000.0));
@@ -46,6 +46,7 @@ public class Tourist extends Visitor {
             if (funds <= 0) break;
         }
 
+        //Hazamegyünk
         leave();
 
     }

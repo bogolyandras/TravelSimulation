@@ -27,30 +27,43 @@ public class TravelSimulationModel extends Model implements Parameterizable {
     }
 
     //4 Hét szimulálása
-    public static final double stopTime = 4032000.0;
+    public static final double stopTime = 4 * 7 * 24 * 60 * 100;
 
     public static final Random randomGenerator = new Random();
 
+    //Látogatók vagyonának eloszlása
     private ContDistUniform fundsDistribution;
     public double getFund() {
         return fundsDistribution.sample();
     }
 
+    //Városok
     City ravenna, milano, velence;
+
+    //Tömegközelekdési eszközök
+    Transporter ravenna_milano, milano_velence, velence_ravenna;
 
     public void init() {
         //Vagyonok eloszlása
         fundsDistribution = new ContDistUniform(this, "FundsDistribution", fundsMinimum, fundsMaximum, true, false);
 
         //Városok létrehozása
-        ravenna = new City(this, "Ravenna", false, visitorArrivalRavenna * 100);
-        milano = new City(this, "Milánó", false, visitorArrivalMilano * 100);
-        velence = new City(this, "Velence", false, visitorArrivalVelence * 100);
+        ravenna = new City(this, "Ravenna", false, visitorArrivalRavenna * 100, 100);
+        milano = new City(this, "Milánó", false, visitorArrivalMilano * 100, 200);
+        velence = new City(this, "Velence", false, visitorArrivalVelence * 100, 150);
 
         //Városok közötti útvonalak létrehozása
-        ravenna.getDestinations().add(new Route(milano, 180 * 100, 15.0));
-        milano.getDestinations().add(new Route(velence, 261 * 100, 25.0));
-        velence.getDestinations().add(new Route(ravenna, 220 * 100, 20.0));
+        Route route1 = new Route(milano, 180 * 100, 15.0);
+        Route route2 = new Route(velence, 261 * 100, 25.0);
+        Route route3 = new Route(ravenna, 220 * 100, 20.0);
+        ravenna.getDestinations().add(route1);
+        milano.getDestinations().add(route2);
+        velence.getDestinations().add(route3);
+
+        //Városok közötti közlekedési eszközök létrehozása
+        ravenna_milano = new Transporter(this, "Ravenna Milánó", false, route1, 10);
+        milano_velence = new Transporter(this, "Milánó Velence", false, route2, 20);
+        velence_ravenna = new Transporter(this, "Velence Ravenna", false, route3, 30);
     }
 
     public void doInitialSchedules() {
@@ -58,10 +71,19 @@ public class TravelSimulationModel extends Model implements Parameterizable {
         ravenna.schedule();
         milano.schedule();
         velence.schedule();
+
+        //Tömegközelekdés indítása
+        ravenna_milano.activate();
+        milano_velence.activate();
+        velence_ravenna.activate();
     }
 
+    //Látogatók érkezésének gyakorisága
     protected double visitorArrivalRavenna = 0.5, visitorArrivalMilano = 0.8, visitorArrivalVelence = 1.0;
+    //Látogatók vagyonának összege
     protected double fundsMinimum = 100, fundsMaximum = 1000;
+
+
     public Map<String, AccessPoint> createParameters() {
         Map<String, AccessPoint> pm = new TreeMap<String, AccessPoint>();
         pm.put("Látogatók költenivalója _ EUR -tól", new MutableFieldAccessPoint("fundsMinimum", this));
