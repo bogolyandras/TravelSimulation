@@ -15,11 +15,13 @@ public class Transporter extends SimProcess {
 
     Route route;
     int capacity;
+    TravelSimulationModel travelSimulationModel;
 
     public Transporter(Model owner, String name, boolean showInTrace, Route route, int capacity) {
         super(owner, name, showInTrace);
         this.route = route;
         this.capacity = capacity;
+        this.travelSimulationModel = (TravelSimulationModel)owner;
     }
 
     public int getCapacity() {
@@ -37,8 +39,10 @@ public class Transporter extends SimProcess {
                 passengers.add(t);
                 //Jegykezelés
                 t.setFunds(t.getFunds() - route.getCost());
+                travelSimulationModel.transportationRevenue += route.getCost();
             }
             route.touristsWaiting.removeAll();
+            travelSimulationModel.transportationRevenueSeries.update(travelSimulationModel.transportationRevenue);
 
 
             //Út megtétele
@@ -50,7 +54,9 @@ public class Transporter extends SimProcess {
                 t.setCity(route.endpoint);
                 t.activate();
             }
+            travelSimulationModel.transportedPeople += passengers.size();
             passengers.clear();
+            travelSimulationModel.transportedPeopleSeries.update(travelSimulationModel.transportedPeople);
 
             //Visszaút
             hold(new TimeSpan(route.getTravelTime()));

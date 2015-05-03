@@ -25,15 +25,17 @@ public class GraphicalModelRunner extends ExperimentRunner {
 
         TravelSimulationModel travelSimulationModel = (TravelSimulationModel)getModel();
 
-        TimeSeriesPlotter tp1 = new TimeSeriesPlotter("Városok populációi",c, travelSimulationModel.ravenna.getPopulationSeries(), 400,360, travelSimulationModel.ravenna.getPopulationSeries().getName());
+        TimeSeriesPlotter tp1 = new TimeSeriesPlotter("Városok populációi", c, travelSimulationModel.ravenna.getPopulationSeries(), 400,360, travelSimulationModel.ravenna.getPopulationSeries().getName());
         tp1.addTimeSeries(travelSimulationModel.velence.getPopulationSeries());
         tp1.addTimeSeries(travelSimulationModel.milano.getPopulationSeries());
 
-        TimeSeriesPlotter tp2 = new TimeSeriesPlotter("Városok bevételei",c, travelSimulationModel.ravenna.getRevenueSeries(), 400,360, travelSimulationModel.ravenna.getRevenueSeries().getName());
+        TimeSeriesPlotter tp2 = new TimeSeriesPlotter("Városok bevételei", c, travelSimulationModel.ravenna.getRevenueSeries(), 400,360, travelSimulationModel.ravenna.getRevenueSeries().getName());
         tp2.addTimeSeries(travelSimulationModel.velence.getRevenueSeries());
         tp2.addTimeSeries(travelSimulationModel.milano.getRevenueSeries());
 
-        return new SimRunListener[] { tp1, tp2 };
+        TimeSeriesPlotter tp3 = new TimeSeriesPlotter("Szállított emberek", c, travelSimulationModel.transportedPeopleSeries, 400, 360);
+
+        return new SimRunListener[] { tp1, tp2, tp3 };
 
     }
 

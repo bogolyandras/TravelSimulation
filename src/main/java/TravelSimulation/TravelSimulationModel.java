@@ -3,7 +3,9 @@ package TravelSimulation;
 import desmoj.core.dist.ContDistExponential;
 import desmoj.core.dist.ContDistUniform;
 import desmoj.core.simulator.Model;
+import desmoj.core.simulator.TimeInstant;
 import desmoj.core.simulator.TimeSpan;
+import desmoj.core.statistic.TimeSeries;
 import desmoj.core.util.AccessPoint;
 import desmoj.core.util.Parameterizable;
 import desmoj.extensions.experimentation.reflect.MutableFieldAccessPoint;
@@ -43,9 +45,25 @@ public class TravelSimulationModel extends Model implements Parameterizable {
     //Tömegközelekdési eszközök
     Transporter ravenna_milano, milano_velence, velence_ravenna;
 
+    //Statisztika a tömegközlekedési bevételről
+    public double transportationRevenue;
+    TimeSeries transportationRevenueSeries;
+
+    //Statisztika a szállított emberek számáról
+    public double transportedPeople;
+    TimeSeries transportedPeopleSeries;
+
     public void init() {
         //Vagyonok eloszlása
         fundsDistribution = new ContDistUniform(this, "FundsDistribution", fundsMinimum, fundsMaximum, true, false);
+
+        transportationRevenue = 0;
+        transportationRevenueSeries = new TimeSeries(this, "Tömegközlekedési bevétel",
+                new TimeInstant(0), new TimeInstant(TravelSimulationModel.stopTime), true, false);
+
+        transportedPeople = 0;
+        transportedPeopleSeries = new TimeSeries(this, "Szállított emberek",
+                new TimeInstant(0), new TimeInstant(TravelSimulationModel.stopTime), true, false);
 
         //Városok létrehozása
         ravenna = new City(this, "Ravenna", false, visitorArrivalRavenna * 100, 100);
@@ -83,7 +101,7 @@ public class TravelSimulationModel extends Model implements Parameterizable {
     //Látogatók vagyonának összege
     protected double fundsMinimum = 100, fundsMaximum = 1000;
 
-
+    //A modell eszerint paraméterezhető
     public Map<String, AccessPoint> createParameters() {
         Map<String, AccessPoint> pm = new TreeMap<String, AccessPoint>();
         pm.put("Látogatók költenivalója _ EUR -tól", new MutableFieldAccessPoint("fundsMinimum", this));

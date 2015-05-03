@@ -29,7 +29,7 @@ public class Tourist extends Visitor {
         double decision;
         while (true) {
             decision = TravelSimulationModel.randomGenerator.nextDouble();
-            if (false) {
+            if (decision < 0.1) {
                 //Utazás 10% eséllyel
                 Route route = super.getCity().getDestinations().get(
                         TravelSimulationModel.randomGenerator.nextInt(super.getCity().getDestinations().size()));
