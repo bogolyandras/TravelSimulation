@@ -8,8 +8,9 @@ We have to download the file called [desmoj-2.4.2-demo-bin-gui.jar]
 [DESMO-J project website](http://sourceforge.net/)
 
 ## Installing to our local maven repository
-We should issue the corresponding maven command, similar to that
->mvn install:install-file -Dfile=C:\Users\youruser\Downloads\desmoj-2.4.2-demo-bin-gui.jar -DgroupId=desmoj -DartifactId=desmoj -Dversion=2.4.2 -Dpackaging=jar  
-
+We should issue the corresponding maven command, similar to that  
+```
+mvn install:install-file -Dfile=C:\Users\youruser\Downloads\desmoj-2.4.2-demo-bin-gui.jar -DgroupId=desmoj -DartifactId=desmoj -Dversion=2.4.2 -Dpackaging=jar  
+```  
 to install the library correctly, referenced in our pom.xml.
 Change the -Dfile= parameter accordingly to your filesystem.
