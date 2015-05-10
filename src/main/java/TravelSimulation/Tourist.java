@@ -1,7 +1,6 @@
 package TravelSimulation;
 
 import desmoj.core.simulator.Model;
-import desmoj.core.simulator.TimeSpan;
 
 /**
  * Created by András on 4/26/2015.

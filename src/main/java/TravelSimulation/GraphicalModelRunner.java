@@ -1,6 +1,5 @@
 package TravelSimulation;
 
-import desmoj.core.statistic.TimeSeries;
 import desmoj.core.util.AccessPoint;
 import desmoj.core.util.SimRunListener;
 import desmoj.extensions.experimentation.ui.ExperimentStarterApplication;

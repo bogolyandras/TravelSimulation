@@ -1,10 +1,8 @@
 package TravelSimulation;
 
-import desmoj.core.dist.ContDistExponential;
 import desmoj.core.dist.ContDistUniform;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeInstant;
-import desmoj.core.simulator.TimeSpan;
 import desmoj.core.statistic.TimeSeries;
 import desmoj.core.util.AccessPoint;
 import desmoj.core.util.Parameterizable;
