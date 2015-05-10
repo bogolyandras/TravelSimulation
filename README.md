@@ -14,3 +14,9 @@ mvn install:install-file -Dfile=C:\Users\youruser\Downloads\desmoj-2.4.2-demo-bi
 ```  
 to install the library correctly, referenced in our pom.xml.
 Change the ```-Dfile=``` parameter accordingly to your filesystem.
+
+# To build an executable jar
+Use the following maven command:  
+```
+clean compile assembly:single
+```
