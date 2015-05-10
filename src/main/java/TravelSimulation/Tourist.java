@@ -1,6 +1,8 @@
 package TravelSimulation;
 
 import desmoj.core.simulator.Model;
+import desmoj.core.simulator.TimeInstant;
+import desmoj.core.simulator.TimeOperations;
 
 /**
  * Created by András on 4/26/2015.
@@ -11,8 +13,10 @@ public class Tourist extends Visitor {
 
     public Tourist(Model owner, String name, boolean showInTrace, City city) {
         super(owner, name, showInTrace, city);
+        timeArrived = presentTime();
     }
 
+    //region Funds
     private double funds;
 
     public double getFunds() {
@@ -22,6 +26,15 @@ public class Tourist extends Visitor {
     public void setFunds(double funds) {
         this.funds = funds;
     }
+    //endregion
+
+    //region TimeSpentTravelling
+    private TimeInstant timeArrived;
+
+    public double getTimeSpent() {
+        return TimeOperations.diff(timeArrived, presentTime()).getTimeAsDouble() / (100 * 60);
+    }
+    //endregion
 
     public void lifeCycle() {
 
@@ -49,6 +62,7 @@ public class Tourist extends Visitor {
     }
 
     public void leave() {
+        ((TravelSimulationModel)(this.getCity().getModel())).timeSpentHistogram.update(getTimeSpent());
         super.getCity().getPopulation().remove(this);
     }
 }

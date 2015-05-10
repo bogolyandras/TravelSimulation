@@ -3,6 +3,7 @@ package TravelSimulation;
 import desmoj.core.dist.ContDistUniform;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeInstant;
+import desmoj.core.statistic.Histogram;
 import desmoj.core.statistic.TimeSeries;
 import desmoj.core.util.AccessPoint;
 import desmoj.core.util.Parameterizable;
@@ -51,6 +52,9 @@ public class TravelSimulationModel extends Model implements Parameterizable {
     public double transportedPeople;
     TimeSeries transportedPeopleSeries;
 
+    //Statisztika az itt eltöltött időről
+    Histogram timeSpentHistogram;
+
     public void init() {
         //Vagyonok eloszlása
         fundsDistribution = new ContDistUniform(this, "FundsDistribution", fundsMinimum, fundsMaximum, true, false);
@@ -62,6 +66,8 @@ public class TravelSimulationModel extends Model implements Parameterizable {
         transportedPeople = 0;
         transportedPeopleSeries = new TimeSeries(this, "Szállított emberek",
                 new TimeInstant(0), new TimeInstant(TravelSimulationModel.stopTime), true, false);
+
+        timeSpentHistogram = new Histogram(this, "Túrista ciklusidő", 0, 400, 10, true, false);
 
         //Városok létrehozása
         ravenna = new City(this, "Ravenna", false, visitorArrivalRavenna * 100, 100);
@@ -111,7 +117,7 @@ public class TravelSimulationModel extends Model implements Parameterizable {
 
     //A modell eszerint paraméterezhető
     public Map<String, AccessPoint> createParameters() {
-        Map<String, AccessPoint> pm = new TreeMap<String, AccessPoint>();
+        Map<String, AccessPoint> pm = new TreeMap<>();
         pm.put("Látogatók költenivalója _ EUR -tól", new MutableFieldAccessPoint("fundsMinimum", this));
         pm.put("Látogatók költenivalója _ EUR -ig", new MutableFieldAccessPoint("fundsMaximum", this));
         pm.put("Látogatók érkezése Velencébe _ percenként", new MutableFieldAccessPoint("visitorArrivalVelence", this));

@@ -4,6 +4,7 @@ import desmoj.core.util.AccessPoint;
 import desmoj.core.util.SimRunListener;
 import desmoj.extensions.experimentation.ui.ExperimentStarterApplication;
 import desmoj.extensions.experimentation.ui.GraphicalObserverContext;
+import desmoj.extensions.experimentation.ui.HistogramPlotter;
 import desmoj.extensions.experimentation.ui.TimeSeriesPlotter;
 import desmoj.extensions.experimentation.util.AccessUtil;
 import desmoj.extensions.experimentation.util.ExperimentRunner;
@@ -38,6 +39,8 @@ public class GraphicalModelRunner extends ExperimentRunner {
 
         TimeSeriesPlotter tp4 = new TimeSeriesPlotter("Tömegközlekedés bevételei", c, travelSimulationModel.transportationRevenueSeries, 400, 360);
 
+        HistogramPlotter hp = new HistogramPlotter("Túrista ciklusidő", c, travelSimulationModel.timeSpentHistogram, "Eltöltött óra", 360,360, 365,0);
+
         tp1.setLocation(0, 0);
         tp1.setSize(500, 300);
 
@@ -50,7 +53,10 @@ public class GraphicalModelRunner extends ExperimentRunner {
         tp4.setLocation(510, 310);
         tp4.setSize(500, 300);
 
-        return new SimRunListener[] { tp1, tp2, tp3, tp4 };
+        hp.setLocation(1020, 0);
+        hp.setSize(400, 610);
+
+        return new SimRunListener[] { tp1, tp2, tp3, tp4, hp };
 
     }
 
