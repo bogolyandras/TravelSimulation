@@ -88,14 +88,14 @@ public class TravelSimulationModel extends Model implements Parameterizable {
         velence_ravenna = new Transporter(this, "Velence Ravenna", false, route3, 30);
 
         //Városok látnivalói
-        ravenna.getAttractivities().add(new Attractivity("Basilica of San Vitae", ravenna, 10, 60 * 100, 120 * 100));
-        ravenna.getAttractivities().add(new Attractivity("Mausoleum of Galla Placidia", ravenna, 8, 120 * 100, 240 * 100));
+        ravenna.getAttractivities().add(new Sight("Basilica of San Vitae", ravenna, 10, 60 * 100, 120 * 100));
+        ravenna.getAttractivities().add(new Sight("Mausoleum of Galla Placidia", ravenna, 8, 120 * 100, 240 * 100));
 
-        milano.getAttractivities().add(new Attractivity("Basilica of San Vitae", milano, 10, 60 * 100, 120 * 100));
-        milano.getAttractivities().add(new Attractivity("Mausoleum of Galla Placidia", milano, 8, 120 * 100, 240 * 100));
+        milano.getAttractivities().add(new Sight("Basilica of San Vitae", milano, 10, 60 * 100, 120 * 100));
+        milano.getAttractivities().add(new Sight("Mausoleum of Galla Placidia", milano, 8, 120 * 100, 240 * 100));
 
-        velence.getAttractivities().add(new Attractivity("Basilica of San Vitae", velence, 10, 60 * 100, 120 * 100));
-        velence.getAttractivities().add(new Attractivity("Mausoleum of Galla Placidia", velence, 8, 120 * 100, 240 * 100));
+        velence.getAttractivities().add(new Sight("Basilica of San Vitae", velence, 10, 60 * 100, 120 * 100));
+        velence.getAttractivities().add(new Sight("Mausoleum of Galla Placidia", velence, 8, 120 * 100, 240 * 100));
     }
 
     public void doInitialSchedules() {

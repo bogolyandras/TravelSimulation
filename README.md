@@ -10,7 +10,8 @@ We have to download the file called [desmoj-2.4.2-demo-bin-gui.jar]
 ## Installing to our local maven repository
 We should issue the corresponding maven command, similar to that  
 ```
-mvn install:install-file -Dfile=C:\Users\youruser\Downloads\desmoj-2.4.2-demo-bin-gui.jar -DgroupId=desmoj -DartifactId=desmoj -Dversion=2.4.2 -Dpackaging=jar  
+mvn install:install-file -Dfile=C:\Users\youruser\Downloads\desmoj-2.4.2-demo-bin-gui.jar
+-DgroupId=desmoj -DartifactId=desmoj -Dversion=2.4.2 -Dpackaging=jar  
 ```  
 to install the library correctly, referenced in our pom.xml.
 Change the ```-Dfile=``` parameter accordingly to your filesystem.

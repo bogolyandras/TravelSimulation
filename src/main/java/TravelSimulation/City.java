@@ -36,8 +36,8 @@ public class City extends SimProcess {
     }
 
     //Látnivalók
-    List<Attractivity> attractivities = new ArrayList<>();
-    public List<Attractivity> getAttractivities() {
+    List<Sight> attractivities = new ArrayList<>();
+    public List<Sight> getAttractivities() {
         return attractivities;
     }
 

@@ -7,7 +7,7 @@ import desmoj.core.dist.ContDistUniform;
  *
  */
 
-public class Attractivity {
+public class Sight {
 
     ContDistUniform visitTimeDistribution;
     public double getVisitTime() {
@@ -29,7 +29,7 @@ public class Attractivity {
         return name;
     }
 
-    public Attractivity(String name, City city, double cost, double visitTimeMin, double visitTimeMax) {
+    public Sight(String name, City city, double cost, double visitTimeMin, double visitTimeMax) {
         visitTimeDistribution =  new ContDistUniform(city.getModel(), "VisitTimeDistribution",
                 visitTimeMin, visitTimeMax, true, false);
         this.cost = cost;
