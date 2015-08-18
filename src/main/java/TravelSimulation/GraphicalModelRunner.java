@@ -22,24 +22,24 @@ public class GraphicalModelRunner extends ExperimentRunner {
         super();
     }
 
-    //Diagramok elhelyezése
+    //Placing diagrams
     public SimRunListener[] createSimRunListeners(GraphicalObserverContext c) {
 
         TravelSimulationModel travelSimulationModel = (TravelSimulationModel)getModel();
 
-        TimeSeriesPlotter tp1 = new TimeSeriesPlotter("Városok populációi", c, travelSimulationModel.ravenna.getPopulationSeries(), 400,360, travelSimulationModel.ravenna.getPopulationSeries().getName());
-        tp1.addTimeSeries(travelSimulationModel.velence.getPopulationSeries());
-        tp1.addTimeSeries(travelSimulationModel.milano.getPopulationSeries());
+        TimeSeriesPlotter tp1 = new TimeSeriesPlotter("Population of cities", c, travelSimulationModel.ravenna.getPopulationSeries(), 400,360, travelSimulationModel.ravenna.getPopulationSeries().getName());
+        tp1.addTimeSeries(travelSimulationModel.venice.getPopulationSeries());
+        tp1.addTimeSeries(travelSimulationModel.milan.getPopulationSeries());
 
-        TimeSeriesPlotter tp2 = new TimeSeriesPlotter("Városok bevételei", c, travelSimulationModel.ravenna.getRevenueSeries(), 400,360, travelSimulationModel.ravenna.getRevenueSeries().getName());
-        tp2.addTimeSeries(travelSimulationModel.velence.getRevenueSeries());
-        tp2.addTimeSeries(travelSimulationModel.milano.getRevenueSeries());
+        TimeSeriesPlotter tp2 = new TimeSeriesPlotter("Revenue of cities", c, travelSimulationModel.ravenna.getRevenueSeries(), 400,360, travelSimulationModel.ravenna.getRevenueSeries().getName());
+        tp2.addTimeSeries(travelSimulationModel.venice.getRevenueSeries());
+        tp2.addTimeSeries(travelSimulationModel.milan.getRevenueSeries());
 
-        TimeSeriesPlotter tp3 = new TimeSeriesPlotter("Szállított emberek", c, travelSimulationModel.transportedPeopleSeries, 400, 360);
+        TimeSeriesPlotter tp3 = new TimeSeriesPlotter("Transported people", c, travelSimulationModel.transportedPeopleSeries, 400, 360);
 
-        TimeSeriesPlotter tp4 = new TimeSeriesPlotter("Tömegközlekedés bevételei", c, travelSimulationModel.transportationRevenueSeries, 400, 360);
+        TimeSeriesPlotter tp4 = new TimeSeriesPlotter("Revenue of the public transportation", c, travelSimulationModel.transportationRevenueSeries, 400, 360);
 
-        HistogramPlotter hp = new HistogramPlotter("Túrista ciklusidő", c, travelSimulationModel.timeSpentHistogram, "Eltöltött óra", 360,360, 365,0);
+        HistogramPlotter hp = new HistogramPlotter("Cycle time of tourists", c, travelSimulationModel.timeSpentHistogram, "Spent hours", 360,360, 365,0);
 
         tp1.setLocation(0, 0);
         tp1.setSize(500, 300);
@@ -60,7 +60,7 @@ public class GraphicalModelRunner extends ExperimentRunner {
 
     }
 
-    //Alapértelmezett paraméterek átállítása
+    //Overriding default parameters
     public Map<String,AccessPoint> createParameters() {
         Map<String,AccessPoint> pm = super.createParameters();
         AccessUtil.setValue(pm, EXP_STOP_TIME, TravelSimulationModel.stopTime);

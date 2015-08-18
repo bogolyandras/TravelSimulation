@@ -10,7 +10,7 @@ import desmoj.core.simulator.TimeSpan;
  */
 public class TouristGenerator extends ExternalEvent {
 
-    //Hivatkozás az adott városhoz
+    //Reference to the city we are in
     private City city;
     private TravelSimulationModel travelSimulationModel;
 
@@ -22,15 +22,15 @@ public class TouristGenerator extends ExternalEvent {
 
     public void eventRoutine() {
 
-        //Új látogató létrehozása és elhelyezése a városban
-        Tourist tourist = new Tourist(getModel(), "Próba János", false, city);
+        //Create and place a new tourist
+        Tourist tourist = new Tourist(getModel(), "Sample Tourist", false, city);
         tourist.setFunds(travelSimulationModel.getFund());
         city.getPopulation().add(tourist);
 
-        //Tegye, amit tennie kell!
+        //Let him/her do what he/she should
         tourist.activate(new TimeSpan(0.0));
 
-        //Önmagát visszahívja
+        //Then we wait for the next tourists, call back ourselves
         schedule(new TimeSpan(city.getVisitorArrivalTime()));
     }
 

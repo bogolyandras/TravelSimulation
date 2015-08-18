@@ -34,10 +34,10 @@ public class Transporter extends SimProcess {
 
         while (true) {
 
-            //Túristák felvétele a várólistáról
+            //Pick up tourists from the queue
             for(Tourist t : route.touristsWaiting) {
                 passengers.add(t);
-                //Jegykezelés
+                //Buying tickets
                 t.setFunds(t.getFunds() - route.getCost());
                 travelSimulationModel.transportationRevenue += route.getCost();
             }
@@ -45,10 +45,10 @@ public class Transporter extends SimProcess {
             travelSimulationModel.transportationRevenueSeries.update(travelSimulationModel.transportationRevenue);
 
 
-            //Út megtétele
+            //Taking the route
             hold(new TimeSpan(route.getTravelTime()));
 
-            //Utasok kirakása az új városba
+            //Place the tourists in the new city
             for(Tourist t : passengers) {
                 t.getCity().getPopulation().remove(t);
                 t.setCity(route.endpoint);
@@ -58,7 +58,7 @@ public class Transporter extends SimProcess {
             passengers.clear();
             travelSimulationModel.transportedPeopleSeries.update(travelSimulationModel.transportedPeople);
 
-            //Visszaút
+            //The route back
             hold(new TimeSpan(route.getTravelTime()));
 
         }

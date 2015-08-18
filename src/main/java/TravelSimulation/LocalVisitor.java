@@ -20,10 +20,10 @@ public class LocalVisitor extends Visitor {
         while (true) {
             decision = TravelSimulationModel.randomGenerator.nextDouble();
             if (decision < 0.9) {
-                //Kisebb semmittevés 90% os eséllyel
+                //90% chance of doing nothing
                 hold(new TimeSpan(5*60*100));
             } else {
-                //10% -os eséllyel egy nevezetesség meglátogatása
+                //10% chance of visiting something
                 visitAnAttractivity(this);
             }
 

@@ -42,21 +42,21 @@ public class Tourist extends Visitor {
         while (true) {
             decision = TravelSimulationModel.randomGenerator.nextDouble();
             if (decision < 0.1) {
-                //Utazás 10% eséllyel
+                //10% chance of traveling
                 Route route = super.getCity().getDestinations().get(
                         TravelSimulationModel.randomGenerator.nextInt(super.getCity().getDestinations().size()));
                 route.touristsWaiting.insert(this);
                 passivate(); //Várakozás
             } else {
-                //Pénzköltés 90% eséllyel
+                //90% chance of speding money
                 funds -= visitAnAttractivity(this);
             }
 
-            //Ha elfogyott a pénz, akkor hazamegyünk
+            //If we ran out of money
             if (funds <= 0) break;
         }
 
-        //Hazamegyünk
+        //We go home
         leave();
 
     }

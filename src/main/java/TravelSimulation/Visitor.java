@@ -29,14 +29,14 @@ public abstract class Visitor extends SimProcess {
 
         City city = visitor.getCity();
 
-        //Egy látnivaló kiszemelése
+        //Choose a sight
         Sight sight = city.getAttractivities()
                 .get(TravelSimulationModel.randomGenerator.nextInt(city.getAttractivities().size()));
 
-        //Belépőjegy megvétele
+        //buy the ticket
         sight.getCity().revenue += sight.getCost();
 
-        //Látogatás
+        //and visit it
         visitor.hold(new TimeSpan(sight.getVisitTime()));
 
         return sight.getCost();

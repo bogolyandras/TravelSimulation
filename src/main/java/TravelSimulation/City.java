@@ -22,47 +22,47 @@ public class City extends SimProcess {
         touristGenerator = new TouristGenerator(owner, "TouristGenerator for " + name, false, this);
         dataUpdater = new DataUpdater(owner, "Dataupdate for " + name, false, this);
 
-        //Lakosság előkészítése
+        //Prepare the population
         Population = new ArrayList<>();
         for(int i = 0; i < initialPopulation; i++) {
-            Population.add(new LocalVisitor(owner, "Helyi János", false, this));
+            Population.add(new LocalVisitor(owner, "A Local person", false, this));
         }
     }
 
-    //Lakosság
+    //Population
     List<Visitor> Population;
     public List<Visitor> getPopulation() {
         return Population;
     }
 
-    //Látnivalók
+    //Sights
     List<Sight> attractivities = new ArrayList<>();
     public List<Sight> getAttractivities() {
         return attractivities;
     }
 
-    //Lakosság rögzítése
-    TimeSeries populationSeries = new TimeSeries(getModel(), getName() + "Lakossága",
+    //Tracking the population
+    TimeSeries populationSeries = new TimeSeries(getModel(), getName() + "Population",
             new TimeInstant(0), new TimeInstant(TravelSimulationModel.stopTime), true, false);
     public TimeSeries getPopulationSeries() {
         return populationSeries;
     }
 
-    //Bevétel rögzítése
+    //Tracking the revenue
     public double revenue = 0;
-    TimeSeries revenueSeries = new TimeSeries(getModel(), getName() + "Bevétele",
+    TimeSeries revenueSeries = new TimeSeries(getModel(), getName() + "Revenue",
             new TimeInstant(0), new TimeInstant(TravelSimulationModel.stopTime), true, false);
     public TimeSeries getRevenueSeries() {
         return revenueSeries;
     }
 
-    //Útvonalak
+    //Routes
     List<Route> destinations = new ArrayList<>();
     public List<Route> getDestinations() {
         return destinations;
     }
 
-    //Látogatók érkezése kívülről
+    //Arrival of tourists
     private TouristGenerator touristGenerator;
     private ContDistExponential visitorArrivalDistribution;
     public double getVisitorArrivalTime() {
